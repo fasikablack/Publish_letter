@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Jenboro</title>
+<link rel="icon" type="image/x-icon" href="{% static 'img/jenboro.png' %}">
+<script src="{% static 'js/axios.min.js' %}"></script> 
+<link rel="stylesheet" type="text/css" href="{% static 'css/Home.css' %}">
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/Admin.css' %}"> {% endcomment %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+</head>
+<body>
+<div class="menu-bar">
+  <a href="http://localhost:8069/web#cids=1&menu_id=321&action=464&model=sale.order&view_type=kanban" ><i class="fa fa-th-large" style="font-size:16px;"></i>&nbsp;<span style="font-size:20px;">Collection</span></a>
+</div>
+<form action="" method="POST" onsubmit="Publish(event)">
+{% csrf_token %}
+<div class="topcontainer">
+  <div class="container">
+    <div class="header">
+      <h2>Publish Letter</h2>
+    </div>
+    <form action="" method="post" id="form" class="form">
+      <div class="form-control">
+        <label for="Date">Date</label>
+        <input type="date" name="Date" id="Date" required>
+      </div>
+      <div class="form-control">
+        <label for="username">Customer</label>
+        <select id="customer">
+          {% for customer in customers %}
+          <option value="{{customer.name}}">{{customer.name}}</option>
+          {% endfor%}
+        </select> 
+      </div>
+      <div class="form-control">
+        <label for="username">Reference Number</label>
+        <input type="text" name="referenceNum" id="referenceNum" placeholder="referenceNumber" required>
+      </div>
+      <div class="form-control">
+        <label for="username">Document Type</label>
+        <select id="documentType">
+          {% for document in document_type %}
+          <option value="{{document}}">{{document}}</option>
+          {% endfor%}
+        </select> 
+      </div>      
+      <button type="submit" class="button">Publish</button>
+    </form>
+  </div>
+</div>
+
+{% comment %} <h5 class="card-title">Choose Document</h5> 
+<input class="form-control" type="month" id="payrollDate" onchange="ReturnSaved()">
+<label style="font-size: small;font-weight: bold;" class="input-group-text">Customer Name</label>
+<input type="text"> {% endcomment %}
+{% comment %} <label style="font-size: small;font-weight: bold;" class="input-group-text">Discription</label>
+<input type="text"> 
+<button type="submit" class="btn btn-primary me-md-2">Publish</button>
+</div> {% endcomment %}
+</body>
+<script>
+  function Publish(event){
+    event.preventDefault()
+    var customer = document.getElementById('customer').value
+    var Date = document.getElementById('Date').value
+    var documentType = document.getElementById('documentType').value
+    var referenceNum = document.getElementById('referenceNum').value
+    /*axios.get('/home/',{params:{'customer':customer,'Discription':Discription}})
+      .then(response => {
+        console.log(response)
+      })*/
+    axios.get(`/home/`, {
+      params: {
+        'customer':customer,
+        'referenceNum':referenceNum,
+        'Date':Date,
+        'documentType':documentType
+        },
+        responseType: 'arraybuffer',
+    })
+    .then(response => {
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const dataUrl = URL.createObjectURL(blob);
+        window.open(dataUrl, '_blank');
+    })
+    .catch(error => {
+        console.error('Error downloading PDF:', error);
+    });  
+  }
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

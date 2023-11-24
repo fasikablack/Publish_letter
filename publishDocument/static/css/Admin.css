@@ -1,0 +1,280 @@
+*
+{
+	padding:0;
+	box-sizing:border-box;
+    margin:0;
+}
+body
+{	
+	background-image:url(imgs/Sat.jpg);
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-size:cover;
+	font-family:sans-serif;
+}
+.menu-bar
+{
+position:fixed;
+background:rgb(0,0,0);
+max-width:300;
+height:100%;
+text-align:left;
+overflow-y:auto;
+z-index:5;/*lay out over text*/
+	
+}
+.menu-bar ul
+{
+	display:block;
+	list-style:none;
+	color:#fff;
+	z-index:5;
+}
+.menu-bar ul li
+{
+	width:300px;
+	padding:15px;
+	margin-bottom:10px;
+	z-index:5;
+}
+.menu-bar ul li a
+{
+	text-decoration:none;
+	color:#fff;
+	z-index:5;
+	
+}
+.active, .menu-bar ul li:hover
+{
+	background:#2bab0d;
+	border-radius:3px;
+	z-index:5;
+	
+}
+.menu-bar .fa
+{
+	margin-right:20px;
+	z-index:5;
+	
+}
+.search-bar{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+}
+.search-bar input{
+	border:2px solid #f0f0f0;
+	border-radius:100px;
+	display:block;
+	font-family:inherit;
+	font-size:20px;
+	padding:5px;
+	width:100%;
+}
+.search-bar button {
+	background-color:black;
+	border:2px solid #8E7258;
+	border-radius:100px;
+	color:#fff;
+	display:block;
+	font-family:inherit;
+	font-size:16px;
+	padding:10px;
+	width:35%;
+}
+
+
+
+header h1{
+	left:-200px;
+	font-size:60px;
+	color:#fff;
+	
+	
+}
+
+h1{ 
+    position:fixed; 
+	margin-top:40px;
+	margin-left:700px;
+	font-size:60px;
+	color:#fff;
+}
+img{
+	margin-top:200px;
+	margin-left:700px;
+}
+p{
+	margin-top:50px;
+	margin-left:500px;
+	font-size:30px;
+	color:#fff;	
+}
+.sub-menu-1
+{
+	display:none;
+	z-index:5;
+}
+.menu-bar ul li:hover .sub-menu-1
+{
+	display:block;
+	position:fixed;
+	left:315px;
+	background:rgb(0,0,0);
+	margin-top:-15px;
+	margin-left:-15px;
+	z-index:5;
+}
+.menu-bar ul li:hover .sub-menu-1 ul
+{
+	display:block;
+	margin:10px;
+	z-index:5;
+}
+.menu-bar ul li:hover .sub-menu-1 ul li
+{
+	width:160px;	
+	padding:10px;
+	margin:10px;
+	border-bottom:1px dotted #fff;
+	background:transparent;
+	border-radius:0;
+	text-align:left;
+	z-index:5;
+}
+.menu-bar ul li:hover .sub-menu-1 ul li:last-child
+{
+	border-bottom:none;
+	z-index:5;
+}
+.menu-bar ul li:hover .sub-menu-1 ul a:hover
+{
+	color:#b2ff00;
+	z-index:5;
+}
+.fa-angle-right
+{
+	float:right;
+}
+
+
+.topcontainer{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	min-height:100vh;
+	margin:0;	
+	padding-top:20;
+}
+.container{
+	background-color:#fff;
+	border-radius:5px;
+	box-shadow:0 2px 5px rgba(0,0,0,0.3);
+	width:570px;
+	max-width:100%;
+}
+.header{
+	background-color:#f7f7f7;
+	border-bottom:1px solid #f0f0f0;
+	padding:20px 40px;
+}
+.header h2{
+	margin:0;
+}
+.form{
+	padding:30px 40px;
+}
+.form-control{
+	margin-bottom:10px;
+	padding-bottom:20px;
+	position:relative;
+}
+.form-control label{
+	display:inline-block;
+	margin-bottom:5px;
+}
+.form-control input{
+	border:2px solid #f0f0f0;
+	border-radius:4px;
+	display:block;
+	font-family:inherit;
+	font-size:14px;
+	padding:10px;
+	width:100%;
+}
+.form-control select{
+	border:2px solid #f0f0f0;
+	border-radius:4px;
+	display:block;
+	font-family:inherit;
+	font-size:14px;
+	padding:10px;
+	width:100%;
+}
+.form-control textarea{
+	border:2px solid #f0f0f0;
+	border-radius:4px;
+	display:block;
+	font-family:inherit;
+	font-size:14px;
+	padding:10px;
+	height:400px;
+	width:500px;
+}
+.form-control.success input{
+	border-color:#2ecc71;
+}
+.form-control.success select{
+	border-color:#2ecc71;
+}
+.form-control.success textarea{
+	border-color:#2ecc71;
+}
+.form-control.error input{
+	border-color:#e74c3c;
+}
+.form-control.error textarea{
+	border-color:#e74c3c;
+}
+.form-control i {
+	position:absolute;
+	top:40px;
+	right:10px;
+	visibility:hidden;
+}
+.form-control.success i.fa-check-circle{
+	color:#2ecc71;
+	visibility:visible;
+}
+.form-control.error i.fa-exclamation-circle{
+	color:#e74c3c;
+	visibility:visible;
+}
+.form-control small{
+	visibility:hidden;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+.form-control.error small{
+	color:#e74c3c;
+	visibility:visible;
+}
+.form button {
+	background-color:black;
+	border:2px solid #8E7258;
+	border-radius:4px;
+	color:#fff;
+	display:block;
+	font-family:inherit;
+	font-size:16px;
+	padding:10px;
+	width:100%;
+}
+.form a{
+	color:black;
+	display:block;
+	text-decoration:none;
+	text-align:center;
+	font-size:larger;
+}
