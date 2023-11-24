@@ -14,17 +14,17 @@ from django.http import HttpResponse
 import time
 
 def main(request):
-    db = 'realestate_db'
-    username = 'fasikazelalem12@gmail.com'
-    password = '123'
+    db = 'ur__odoo_database_name'
+    username = 'ur_user_name_u_use_to_log_into_odoo'
+    password = 'ur_password'
     customers = ""
     document_type = ['Warning','Cancellation']
     # common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-    common = xmlrpc.client.ServerProxy('http://192.168.10.31:8069/xmlrpc/2/common')    
+    common = xmlrpc.client.ServerProxy('http://localhost:8069/xmlrpc/2/common')    
     uid = common.authenticate(db,username,password,{})
     if uid:
         # models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
-        models = xmlrpc.client.ServerProxy('http://192.168.10.31:8069/xmlrpc/2/object')
+        models = xmlrpc.client.ServerProxy('http://localhost:8069/xmlrpc/2/object')
         customers = models.execute_kw(db,uid,password,'res.partner','search_read',[[]],{'fields':['name']})
         # print(customers)
     # for a in user:
@@ -34,7 +34,7 @@ def main(request):
         print(request.GET.get('Date'))
         print(request.GET.get('documentType'))
 
-        _, _, files = next(os.walk("/home/atcom/Documents/Project_Realestate/Publish_Document/publish_document/publishDocument/static/letterFiles/templates/"+str(request.GET.get('documentType'))+"/"))
+        _, _, files = next(os.walk("~/Publish_Document/publish_document/publishDocument/static/letterFiles/templates/"+str(request.GET.get('documentType'))+"/"))
         file_count = len(files)
         # print(request.GET.get('referenceNum'))
         for pageNum in range(file_count):
@@ -64,11 +64,11 @@ def main(request):
             Images_list.append(str(a)+".jpg")
 
         images = [
-        Image.open("/home/atcom/Documents/Project_Realestate/Publish_Document/publish_document/publishDocument/static/letterFiles/Modified_IMG/"+str(request.GET.get('documentType'))+"/" + f)
+        Image.open("~/Publish_Document/publish_document/publishDocument/static/letterFiles/Modified_IMG/"+str(request.GET.get('documentType'))+"/" + f)
         for f in Images_list
         ]
 
-        # pdf_path = "/home/atcom/Documents/Project_Realestate/Publish_Document/publish_document/publishDocument/static/letterFiles/letterPDF/CancelationLetter.pdf"
+        # pdf_path = "~/Publish_Document/publish_document/publishDocument/static/letterFiles/letterPDF/CancelationLetter.pdf"
 
         # images[0].save(
         # pdf_path, "PDF" ,resolution=100.0, save_all=True, append_images=images[1:]
@@ -94,8 +94,8 @@ def main(request):
     return render(request,"api/Publish_document.html",{'customers':customers,'document_type':document_type})
 
 def editContractFile(top_left_x,top_left_y,bottom_right_x,bottom_right_y,pageNum,replaceWord,documentType):
-    file_path = '/home/atcom/Documents/Project_Realestate/Publish_Document/publish_document/publishDocument/static/letterFiles/Modified_IMG/'+str(documentType)+'/'+str(pageNum)+'.jpg'
-    file_path_new = '/home/atcom/Documents/Project_Realestate/Publish_Document/publish_document/publishDocument/static/letterFiles/templates/'+str(documentType)+'/'+str(pageNum)+'.jpg'
+    file_path = '~/Publish_Document/publish_document/publishDocument/static/letterFiles/Modified_IMG/'+str(documentType)+'/'+str(pageNum)+'.jpg'
+    file_path_new = '~/Publish_Document/publish_document/publishDocument/static/letterFiles/templates/'+str(documentType)+'/'+str(pageNum)+'.jpg'
     if os.path.exists(file_path):
         img = cv2.imread(file_path)
     else:
@@ -117,5 +117,5 @@ def editContractFile(top_left_x,top_left_y,bottom_right_x,bottom_right_y,pageNum
     img = cv2.putText(img, text, org, font, fontScale, color, thickness, cv2.LINE_AA)
     
     # Save the resulting image
-    cv2.imwrite('/home/atcom/Documents/Project_Realestate/Publish_Document/publish_document/publishDocument/static/letterFiles/Modified_IMG/'+str(documentType)+'/'+str(pageNum)+'.jpg', img)
+    cv2.imwrite('~/Publish_Document/publish_document/publishDocument/static/letterFiles/Modified_IMG/'+str(documentType)+'/'+str(pageNum)+'.jpg', img)
     # return 'yes'
